@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmokingV2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SmokingV2</h1>
+      <p>Le concours par invitation</p>
+    </header>
+    <div id="toast" class="toast"></div>
+
+    <div id="page-login">
+      <div class="tabs">
+        <button class="tab active" onclick="showLoginTab('returning')">Connexion</button>
+        <button class="tab" onclick="showLoginTab('first')">Première connexion</button>
+      </div>
+      <div id="tab-returning">
+        <div class="card">
+          <h2>Content de vous revoir</h2>
+          <p>Nom d'utilisateur et mot de passe suffisent.</p>
+          <input class="input" id="login-user" placeholder="Nom d'utilisateur" type="text">
+          <input class="input" id="login-pass" placeholder="Mot de passe" type="password">
+          <button class="btn btn-primary" onclick="doLogin()">Se connecter</button>
+        </div>
+      </div>
+      <div id="tab-first" class="hidden">
+        <div class="card">
+          <h2>Bienvenue sur SmokingV2</h2>
+          <p>L'accès se fait sur invitation. Utilisez votre code d'activation ci-dessous.</p>
+          <input class="input" id="activate-code" placeholder="Code d'activation" type="text">
+          <input class="input" id="activate-user" placeholder="Choisissez un nom d'utilisateur" type="text">
+          <input class="input" id="activate-pass" placeholder="Choisissez un mot de passe" type="password">
+          <button class="btn btn-primary" onclick="doActivate()">Activer mon compte</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Classement</h2>
+        <p class="muted">Connectez-vous pour voir le tableau des scores.</p>
+      </div>
+      <div class="card">
+        <h2>Prix</h2>
+        <p class="muted">Connectez-vous pour découvrir les récompenses.</p>
+      </div>
+    </div>
+
+    <div id="page-dashboard" class="hidden">
+      <div class="user-bar">
+        <span id="dashboard-user">👤 Utilisateur</span>
+        <span class="logout" onclick="doLogout()">Déconnexion</span>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showDashTab('rank')">Classement</button>
+        <button class="tab" onclick="showDashTab('prizes')">Prix</button>
+      </div>
+      <div id="dash-rank">
+        <div class="card">
+          <h2>Classement général</h2>
+          <table class="leaderboard-table" id="leaderboard-table">
+            <thead><tr><th>#</th><th>Participant</th><th>Score</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="dash-prizes" class="hidden">
+        <div class="card">
+          <h2>Récompenses</h2>
+          <div id="prizes-list"></div>
+        </div>
+      </div>
+      <div class="card hidden" id="admin-card">
+        <h2>🔧 Panel admin</h2>
+        <div class="admin-panel">
+          <h3>Codes d'activation</h3>
+          <div class="code-list" id="code-list"></div>
+        </div>
+        <div class="admin-panel">
+          <h3>Générer un nouveau code</h3>
+          <button class="btn btn-secondary" onclick="generateCode()" style="margin-top:8px;">Générer</button>
+          <p id="new-code-display" style="margin-top:8px;color:#22c55e;font-family:monospace;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
